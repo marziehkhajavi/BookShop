@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import Logo from "assets/pictures/Union.png";
-import { sendRegister } from 'services/Auth';
+import { sendRegister } from 'services/auth';
 
 import styles from "./SignUpForm.module.css";
 import validateForm from 'src/helpers/validation';
