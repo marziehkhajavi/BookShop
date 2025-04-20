@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Logo from "assets/pictures/Union.png";
-import { sendLogin } from 'services/Auth';
+import { sendLogin } from 'services/auth';
 
 import styles from "./LoginForm.module.css";
 import { useNavigate } from 'react-router-dom';
