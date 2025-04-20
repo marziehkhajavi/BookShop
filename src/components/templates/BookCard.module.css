@@ -1,0 +1,90 @@
+* {
+    background-color: #FCFCFC;
+}
+
+.container {
+    padding: 20px;
+    background-color: #fbfbfb;
+    width: 1140px;
+    height: 90vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    margin: 25px 0 15px 0;
+}
+
+.header span {
+    display: flex;
+}
+
+.header img {
+    width: 32px;
+    height: 32px;
+    margin-left: 15px;
+    margin-top: 6px;
+    margin: 5px 0 0 5px ;
+}
+
+.header p {
+    font-size: 30px;
+    margin: 5px 0 0 5px ;
+}
+
+.sortButton {
+    color: #fff;
+    background-color: #F21055;
+    border: none;
+    border-radius: 10px;
+    width: 154px;
+    height: 64px;
+    font-size: 24px;
+    margin: 5px 0 0 5px ;
+}
+
+.books {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    padding: 15px;
+    /* justify-content: center; */
+    margin: 50px auto;
+    height: 737px;
+}
+
+.bookList {
+    width: 250px;
+    height: 252px;
+    border-radius: 12px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 1);
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+}
+
+.bookList p {
+    font-size: 20px;
+    height: 10px;
+    margin: 10px auto;
+}
+
+.bookList span {
+    font-size: 15px;
+    margin-left: 60px;
+}
+
+.bookList button {
+    background-color: #ffffff00;
+    border: none;
+    width: 25px;
+}
+
+.detail {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
