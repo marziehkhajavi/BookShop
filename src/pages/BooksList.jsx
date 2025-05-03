@@ -36,13 +36,18 @@ const BooksList = () => {
         setModal("add");
     };
 
-    const openEditBookModal = (id) => {
-        setSelectedBookId(id)
+    const openEditBookModal = (book) => {
+        setNewBook({
+            title: book.title,
+            quantity: book.quantity,
+            price: book.price,
+        })
+        setSelectedBookId(book.id)
         setModal("edit");
     }; 
 
-    const openDeleteBookModal = (id) => {
-        setSelectedBookId(id)
+    const openDeleteBookModal = (book) => {
+        setSelectedBookId(book.id)
         setModal("delete");
     };
 
@@ -84,10 +89,10 @@ const BooksList = () => {
                                     <td>{book.price}</td>
                                     <td>{book.id}</td>
                                     <td>
-                                        <button onClick={() => openEditBookModal(book.id)}>
+                                        <button onClick={() => openEditBookModal(book)}>
                                             <img src={edit} alt="" />
                                         </button>
-                                        <button onClick={() => openDeleteBookModal(book.id)}>
+                                        <button onClick={() => openDeleteBookModal(book)}>
                                             <img src={trash} alt="" />
                                         </button>
                                     </td>
@@ -120,8 +125,6 @@ const BooksList = () => {
             {
                 modal === 'delete' && (
                     <DeleteBookModal 
-                        newBook={newBook}
-                        setNewBook={setNewBook}
                         closeModal={closeModal}
                         id={selectedBookId}
                     />

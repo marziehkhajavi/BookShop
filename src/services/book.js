@@ -5,7 +5,7 @@ const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.
 const getBooks = async () => {
     try {
         const response = await api.get("book?page=1&limit=30");
-        console.log(response)
+        // console.log(response)
         return response.data;
     } catch (error) {
         throw error;

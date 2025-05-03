@@ -7,6 +7,7 @@ import { createBook, getBooks } from 'src/services/book';
 const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
 
     const {title, quantity, price} = newBook;
+    
     const queryKey = ["books"]
     const queryClient = useQueryClient();
 
