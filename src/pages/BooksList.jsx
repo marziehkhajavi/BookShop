@@ -14,6 +14,7 @@ import search from "assets/pictures/search.png";
 import setting from "assets/pictures/setting.png";
 
 import styles from "./BooksList.module.css";
+import { Link } from 'react-router-dom';
 
 const BooksList = () => {
 
@@ -63,8 +64,10 @@ const BooksList = () => {
             </div>
             <div className={styles.header}>
                 <span>
-                    <img src={setting} alt="" />
-                    <p>مدیریت کتاب ها</p>
+                    <Link to='/dashboard'>
+                        <img src={setting} alt="" />
+                        <p>مدیریت کتاب ها</p>
+                    </Link>
                 </span>
                 <button onClick={openAddBookModal} className={styles.add}>افزودن کتاب</button>
             </div>

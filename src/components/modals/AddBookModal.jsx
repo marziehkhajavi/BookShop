@@ -4,10 +4,14 @@ import styles from "./AddBookModal.module.css";
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createBook, getBooks } from 'src/services/book';
 
+import toast, { Toaster } from 'react-hot-toast';
+import { messages } from 'src/utils/messages';
+
 const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
 
+    const notify = () => toast('Here is your toast.');
+
     const {title, quantity, price} = newBook;
-    
     const queryKey = ["books"]
     const queryClient = useQueryClient();
 
@@ -18,9 +22,11 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
         onSuccess: (newBook) => {
             console.log("success", newBook);
             queryClient.invalidateQueries({queryKey: ["books"]});
+            return toast.success(messages.success.addBook);
         },
         onError: (error) => {
-            console.log("error", error)
+            console.log("error", error);
+            return toast.error(messages.error.addBook);
         },
      });
 
@@ -29,6 +35,7 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
         mutate({title, quantity, price})
         // const { response , error } = await createBook(title, quantity, price);
         // console.log({response, error})
+        setNewBook("")
         closeModal();
     };
 
@@ -77,6 +84,7 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
                     <button onClick={addHandler} className={styles.add}>ایجاد</button>
                     <button onClick={closeModal} className={styles.cancel}>انصراف</button>
                 </div>
+                
             </form>
         </div>
     );

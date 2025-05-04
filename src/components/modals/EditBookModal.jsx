@@ -3,6 +3,8 @@ import React from 'react';
 import styles from "./EditBookModal.module.css";
 import { editBook } from 'src/services/book';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { messages } from 'src/utils/messages';
+import toast from 'react-hot-toast';
 
 const EditBookModal = ({ newBook, setNewBook, closeModal, id }) => {
 
@@ -15,9 +17,11 @@ const EditBookModal = ({ newBook, setNewBook, closeModal, id }) => {
         onSuccess: (newBook) => {
             console.log("success", newBook);
             queryClient.invalidateQueries({queryKey: ["books"]});
+            return toast.success(messages.success.editBook);
         },
         onError: (error) => {
-            console.log("error", error)
+            console.log("error", error);
+            return toast.error(messages.error.editBook);
         },
      });
 

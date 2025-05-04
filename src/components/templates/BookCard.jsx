@@ -16,8 +16,10 @@ const BookCard = ({data, error}) => {
         <div className={styles.container}>
             <div className={styles.header}>
                 <span>
-                    <img src={icon} alt="" />
-                    <p>همه کتاب ها</p>
+                    <Link to='/'>
+                        <img src={icon} alt="" />
+                        <p>همه کتاب ها</p>
+                    </Link>
                 </span>
                 <div>
                     <button onClick={() => navigate("/auth")} className={styles.sortButton}>حساب کاربری</button>

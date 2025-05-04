@@ -5,6 +5,8 @@ import deleteIcon from "assets/pictures/Close.png";
 import styles from "./DeleteBookModal.module.css";
 import { deleteBook } from 'src/services/book';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import toast from 'react-hot-toast';
+import { messages } from 'src/utils/messages';
 
 const DeleteBookModal = ({ closeModal, id }) => {
     
@@ -16,9 +18,11 @@ const DeleteBookModal = ({ closeModal, id }) => {
         onSuccess: (newBook) => {
             console.log("success", newBook);
             queryClient.invalidateQueries({queryKey: ["books"]});
+            return toast.success(messages.success.deleteBook);
         },
         onError: (error) => {
-            console.log("error", error)
+            console.log("error", error);
+            return toast.error(messages.error.deleteBook);
         },
      });
 

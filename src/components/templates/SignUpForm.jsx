@@ -4,7 +4,10 @@ import Logo from "assets/pictures/Union.png";
 import { sendRegister } from 'services/auth';
 
 import styles from "./SignUpForm.module.css";
-import validateForm from 'src/helpers/validation';
+import toast from 'react-hot-toast';
+import { messages } from 'src/utils/messages';
+import { SignUpValidateForm } from 'src/helpers/validation';
+import { Link } from 'react-router-dom';
 
 const SignUpForm = ({setStep,
                      username,
@@ -20,15 +23,18 @@ const SignUpForm = ({setStep,
     const submitHandler = async (event) => {
         event.preventDefault();
 
-        const validationErrors = await validateForm(username, password, confirmPassword);
-        setErrors(validationErrors);
+        const validationErrors = await SignUpValidateForm(username, password, confirmPassword);
+        await setErrors(validationErrors);
+        if (Object.keys(validationErrors).length !== 0) {
+            toast.error(messages.error.signup);
+        };
 
-        if (Object.keys(validationErrors).length ===0 ) {
+        if (Object.keys(validationErrors).length === 0 ) {
             const { response, error } = await sendRegister(username, password);
             if (response) {
-            setStep(2);
-            } else {
-                console.log(error)
+                toast.success(messages.success.signup);
+                setStep(2);
+                console.log("API:", VITE_BASE_URL)
             }
         };
     };
@@ -42,8 +48,10 @@ const SignUpForm = ({setStep,
     return (
         <form onSubmit={submitHandler} className={styles.form}>
             <header className={styles.header}>
-                <img src={Logo} />
-                <p>فرم ثبت نام</p>
+                <div>
+                    <Link to="/"><img src={Logo} /></Link>
+                    <p>فرم ثبت نام</p>
+                </div>
             </header>
             <div className={styles.formBody}>
                 <div className={styles.formField}>

@@ -33,3 +33,7 @@ input,
 select {
     font-family: inherit;
 }
+
+#_rht_toaster:empty {
+    display: none;
+}

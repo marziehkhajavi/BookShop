@@ -38,8 +38,10 @@ input::placeholder {
     margin: 25px 0 15px 0;
 }
 
-.header span {
+.header span a{
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .header p {

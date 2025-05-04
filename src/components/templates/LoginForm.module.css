@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     gap: 15px;
     margin-top: 50px;
     padding: 20px;
@@ -13,13 +13,41 @@
     background-color: #FFFFFF;
 }
 
+.header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.header div, .header a {
+    background-color: #fff;
+}
+
+.formBody {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    background-color: #fff;
+}
+
+.formField {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .form img {
     width: 80px;
     height: 84px;
+    margin: 0 15px;
+    background-color: #fff;
 }
 
 .form p {
-    margin-bottom: 60px;
+    margin-bottom: 50px;
+    margin-top: 20px;
     font-size: 24px;
     font-weight: 400;
     line-height: 37.5px;
@@ -27,15 +55,16 @@
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
     color: #282828;
+    background-color: #fff;
 }
 
 .form input {
-    width: 400px;
+    width: 100%;
     height: 53px;
     border: none;
     outline: none;
-    background-color: #f2f2f2;
-    padding: 10px;
+    background-color: #F2F2F2;
+    padding: 1px;
     font-size: 16px;
     border-radius: 10px;
 }
@@ -44,12 +73,13 @@
     font-weight: 200;
     color: #28282880;
     background-color: #f2f2f2;
+
 }
 
 .form button {
     color: #fff;
     background-color: #F21055;
-    width: 400px;
+    width: 100%;
     height: 53px;
     border: none;
     border-radius: 10px;
@@ -69,4 +99,10 @@
     margin-left: auto;
     padding-top: 5px;
     cursor: pointer;
+}
+
+.errorText {
+    color: red;
+    font-size: 15px;
+    display: block;
 }

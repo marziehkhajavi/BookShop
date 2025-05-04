@@ -10,10 +10,10 @@ const validatePassword = (password) => {
     return result;
 };
 
-const validateForm = async (username, password, confirmPassword) => {
+const SignUpValidateForm = async (username, password, confirmPassword) => {
     const errors = {};
     if (!username || !password || !confirmPassword) {
-        errors.emptyField = "مشخصات را بطور کامل وارد کنید."
+        errors.emptyField = "مشخصات را کامل وارد کنید."
     } else if (!validateUsername(username)) {
         errors.username = "نام کاربری مناسب انتخاب کنید."
     } else if (!validatePassword(password)) {
@@ -24,4 +24,16 @@ const validateForm = async (username, password, confirmPassword) => {
     return errors;
 };
 
-export default validateForm;
+const LoginValidateForm = async (username, password) => {
+    const errors = {};
+    if (!username || !password ) {
+        errors.emptyField = "مشخصات را بطور کامل وارد کنید."
+    } else if (!validateUsername(username)) {
+        errors.username = "نام کاربری مناسب انتخاب کنید."
+    } else if (!validatePassword(password)) {
+        errors.password = "رمز عبور مناسب انتخاب کنید."
+    }
+    return errors;
+};
+
+export { SignUpValidateForm, LoginValidateForm };
