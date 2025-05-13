@@ -1,6 +1,8 @@
 import api from "configs/api";
+import { getToken } from "src/utils/cookie";
 
-const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1");
+// const token = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*=\s*([^;]*).*$)|^.*$/, "$1");
+const token = getToken();
 
 const getBooks = async () => {
     try {

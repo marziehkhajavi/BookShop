@@ -12,6 +12,7 @@ body {
 .search {
     display: flex;
     align-items: center;
+    /* justify-content: center; */
     background-color: rgba(255, 255, 255, 1);
     border: 1px solid rgba(228, 228, 228, 1);
     border-radius: 16px;
@@ -20,23 +21,36 @@ body {
     margin-bottom: 50px;
 }
 
+.search span {
+    height: 90%;
+    margin: auto 5px;
+}
+
+.search span a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.search svg, input {
+    margin: 10px 0;
+    background-color: #ffffff;
+}
+
 input::placeholder {
     color: rgba(0, 0, 0, 0.6);
     background-color: rgba(255, 255, 255, 1);
     font-size: 16px;
 }
 
-.search img {
-    background-color: rgba(255, 255, 255, 1);
-    padding: 15px;
-    /* margin-right: 50px; */
-}
 
 .header {
     display: flex;
     justify-content: space-between;
     margin: 25px 0 15px 0;
 }
+
 
 .header span a{
     display: flex;

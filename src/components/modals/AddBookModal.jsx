@@ -1,17 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from "./AddBookModal.module.css";
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { createBook, getBooks } from 'src/services/book';
 
-import toast, { Toaster } from 'react-hot-toast';
+import toast from 'react-hot-toast';
 import { messages } from 'src/utils/messages';
+import { BookValidation } from 'src/helpers/validation';
 
 const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
 
-    const notify = () => toast('Here is your toast.');
-
     const {title, quantity, price} = newBook;
+
+    const [errors, setErrors] = useState({});
+
     const queryKey = ["books"]
     const queryClient = useQueryClient();
 
@@ -35,8 +37,10 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
         mutate({title, quantity, price})
         // const { response , error } = await createBook(title, quantity, price);
         // console.log({response, error})
-        setNewBook("")
-        closeModal();
+        const validationErrors = await BookValidation(title, quantity, price);
+        await setErrors(validationErrors);
+        setNewBook("");
+        !validationErrors && closeModal();
     };
 
     return (
@@ -55,6 +59,8 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
                             [e.target.id] :e.target.value})}
                         required
                     />
+                    {errors.title && (
+                    <span className={styles.errorText}>{errors.title}</span>)}
 
                     <label>تعداد موجودی</label>
                     <input 
@@ -67,6 +73,8 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
                             [e.target.id] :e.target.value})}
                         required
                     />
+                    {errors.quantity && (
+                    <span className={styles.errorText}>{errors.quantity}</span>)}
 
                     <label>قیمت</label>
                     <input 
@@ -79,8 +87,12 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
                             [e.target.id] :e.target.value})}
                         required
                     />
+                    {errors.price && (
+                    <span className={styles.errorText}>{errors.price}</span>)}
                 </div>
                 <div className={styles.buttons}>
+                {errors.emptyField && (
+                <span className={styles.errorText}>{errors.emptyField}</span>)}
                     <button onClick={addHandler} className={styles.add}>ایجاد</button>
                     <button onClick={closeModal} className={styles.cancel}>انصراف</button>
                 </div>

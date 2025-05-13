@@ -80,3 +80,9 @@ label {
     height: 42px;
     cursor: pointer;
 }
+
+.errorText {
+    color: red;
+    font-size: 15px;
+    display: block;
+}
