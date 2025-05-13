@@ -21,6 +21,7 @@
     justify-content: center;
 }
 
+
 .header img {
     width: 32px;
     height: 32px;
@@ -32,6 +33,18 @@
 .header p {
     font-size: 30px;
     margin: 5px 0 0 5px ;
+    padding: 5px;
+}
+
+.user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user p {
+    font-size: 18px;
+    padding: 5px;
 }
 
 .sortButton {

@@ -6,7 +6,7 @@ import { sendLogin } from 'services/auth';
 
 import styles from "./LoginForm.module.css";
 import { Link, useNavigate } from 'react-router-dom';
-import setCookie from 'src/utils/cookie';
+import {setCookie} from 'src/utils/cookie';
 import { LoginValidateForm } from 'src/helpers/validation';
 import { messages } from 'src/utils/messages';
 
@@ -33,7 +33,7 @@ const LoginForm = ({
 
         if (Object.keys(validationErrors).length === 0 ) {
             const { response } = await sendLogin(username, password);
-            setCookie(response.data.token);
+            setCookie(response.data.token, username);
             if (response) {
                 navigate("/"); 
                 toast.success(messages.success.login);
