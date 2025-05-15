@@ -80,8 +80,6 @@ const LoginForm = ({
                     <button type='submit'>ورود</button>
                 </div>
             </div>
-            {errors.emptyField && (
-            <span className={styles.errorText}>{errors.emptyField}</span>)}
             <a onClick={confirmHandler}>ایجاد حساب کاربری!</a>
         </form>
     );

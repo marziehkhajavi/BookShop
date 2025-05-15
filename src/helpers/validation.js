@@ -12,41 +12,68 @@ const validatePassword = (password) => {
 
 const SignUpValidateForm = async (username, password, confirmPassword) => {
     const errors = {};
-    if (!username & !password & !confirmPassword) {
-        errors.emptyField = "مشخصات را کامل وارد کنید."
+    if (!username) {
+        errors.username = "نام کاربری را وارد کنید.";
     } else if (!validateUsername(username)) {
-        errors.username = "نام کاربری مناسب انتخاب کنید."
+        errors.username = "نام کاربری مناسب انتخاب کنید.";
+    };
+
+    if (!password) {
+        errors.password = "رمز عبور را وارد کنید.";
     } else if (!validatePassword(password)) {
-        errors.password = "رمز عبور مناسب انتخاب کنید."
+        errors.password = "رمز عبور مناسب انتخاب کنید.";
+    };
+
+    if (!confirmPassword) {
+        errors.confirmPassword = "تکرار رمز عبور را وارد کنید.";
     } else if (password !== confirmPassword) {
-        errors.confirmPassword = " رمز عبور و تکرار آن یکسان نیستند."
-    }
+        errors.confirmPassword = "رمز عبور و تکرار آن یکسان نیستند.";
+    };
+
+    // if (!username & !password & !confirmPassword) {
+    //     errors.emptyField = "مشخصات را کامل وارد کنید."
+    // } else if (!validateUsername(username)) {
+    //     errors.username = "نام کاربری مناسب انتخاب کنید."
+    // } else if (!validatePassword(password)) {
+    //     errors.password = "رمز عبور مناسب انتخاب کنید."
+    // } else if (password !== confirmPassword) {
+    //     errors.confirmPassword = " رمز عبور و تکرار آن یکسان نیستند."
+    // }
     return errors;
 };
 
 const LoginValidateForm = async (username, password) => {
     const errors = {};
-    if (!username & !password ) {
-        errors.emptyField = "مشخصات را بطور کامل وارد کنید."
+
+    if (!username) {
+        errors.username = "نام کاربری را وارد کنید.";
     } else if (!validateUsername(username)) {
-        errors.username = "نام کاربری مناسب انتخاب کنید."
+        errors.username = "نام کاربری مناسب انتخاب کنید.";
+    };
+
+    if (!password) {
+        errors.password = "رمز عبور را وارد کنید.";
     } else if (!validatePassword(password)) {
-        errors.password = "رمز عبور مناسب انتخاب کنید."
-    }
+        errors.password = "رمز عبور مناسب انتخاب کنید.";
+    };
+
     return errors;
 };
 
 const BookValidation = async (title, quantity, price) => {
     const errors = {};
-    if (!title & !quantity & !price) {
-        errors.emptyField = "مشخصات کتاب را به طور کامل وارد کنید.";
-    } else if ( !title ) {
+    if (!title) {
         errors.title = "نام کتاب را وارد کنید.";
-    } else if ( !quantity ) {
-        errors.quantity = "تعداد موجودی کتاب را وارد کنید.";
-    } else if ( !price ) {
+    };
+
+    if (!quantity) {
+        errors.quantity = "موجودی کتاب را وارد کنید.";
+    };
+
+    if (!price) {
         errors.price = "قیمت کتاب را وارد کنید.";
     };
+
     return errors;
 } 
 

@@ -17,14 +17,21 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
     const queryKey = ["books"]
     const queryClient = useQueryClient();
 
-    const {data} = useQuery({queryKey, getBooks})
+    // const {data} = useQuery({queryKey, getBooks})
 
     const mutationFn = ({title, quantity, price}) => createBook(title, quantity, price);
     const { mutate, isPending } = useMutation({ mutationFn,
         onSuccess: (newBook) => {
             console.log("success", newBook);
             queryClient.invalidateQueries({queryKey: ["books"]});
+            setNewBook({
+                title: "",
+                quantity: "",
+                price: "",
+            });
+            closeModal();
             return toast.success(messages.success.addBook);
+
         },
         onError: (error) => {
             console.log("error", error);
@@ -34,18 +41,19 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
 
     const addHandler = async (event) => {
         event.preventDefault();
-        mutate({title, quantity, price})
-        // const { response , error } = await createBook(title, quantity, price);
-        // console.log({response, error})
+
         const validationErrors = await BookValidation(title, quantity, price);
-        await setErrors(validationErrors);
-        setNewBook("");
-        !validationErrors && closeModal();
+        setErrors(validationErrors);
+        console.log(validationErrors)
+
+        if (Object.keys(validationErrors).length === 0) {
+            mutate({ title, quantity, price });
+        };
     };
 
     return (
         <div className={styles.container}>
-            <form className={styles.modal}>
+            <form className={styles.modal} onSubmit={addHandler}>
                 <p>ایجاد محصول جدید</p>
                 <div className={styles.inputs}>
                     <label>نام کتاب</label>
@@ -57,7 +65,6 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
                         onChange={e => setNewBook({
                             ...newBook,
                             [e.target.id] :e.target.value})}
-                        required
                     />
                     {errors.title && (
                     <span className={styles.errorText}>{errors.title}</span>)}
@@ -71,7 +78,6 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
                         onChange={e => setNewBook({
                             ...newBook,
                             [e.target.id] :e.target.value})}
-                        required
                     />
                     {errors.quantity && (
                     <span className={styles.errorText}>{errors.quantity}</span>)}
@@ -85,16 +91,13 @@ const AddBookModal = ({ newBook, setNewBook, closeModal }) => {
                         onChange={e => setNewBook({
                             ...newBook,
                             [e.target.id] :e.target.value})}
-                        required
                     />
                     {errors.price && (
                     <span className={styles.errorText}>{errors.price}</span>)}
                 </div>
                 <div className={styles.buttons}>
-                {errors.emptyField && (
-                <span className={styles.errorText}>{errors.emptyField}</span>)}
-                    <button onClick={addHandler} className={styles.add}>ایجاد</button>
-                    <button onClick={closeModal} className={styles.cancel}>انصراف</button>
+                    <button type="submit" className={styles.add}>ایجاد</button>
+                    <button type="button" onClick={closeModal} className={styles.cancel}>انصراف</button>
                 </div>
                 
             </form>

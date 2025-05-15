@@ -84,8 +84,6 @@ const SignUpForm = ({setStep,
                     <span className={styles.errorText}>{errors.confirmPassword}</span>)}
                 <button type='submit'>ثبت نام</button>
                 </div>
-                {errors.emptyField && (
-                <span className={styles.errorText}>{errors.emptyField}</span>)}
                 <a onClick={confirmHandler}>حساب کاربری دارید؟</a>
             </div>
         </form>

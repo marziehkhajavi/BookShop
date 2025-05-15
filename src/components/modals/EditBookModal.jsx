@@ -21,6 +21,12 @@ const EditBookModal = ({ newBook, setNewBook, closeModal, id }) => {
         onSuccess: (newBook) => {
             console.log("success", newBook);
             queryClient.invalidateQueries({queryKey: ["books"]});
+            setNewBook({
+                title: "",
+                quantity: "",
+                price: "",
+            });
+            closeModal();
             return toast.success(messages.success.editBook);
         },
         onError: (error) => {
@@ -31,18 +37,18 @@ const EditBookModal = ({ newBook, setNewBook, closeModal, id }) => {
 
     const editHandler = async (event) => {
         event.preventDefault();
-        mutate({id, title, quantity, price})
-        // const {response, error} = await editBook(id, title, quantity, price);
-        // console.log({response, error})
+
         const validationErrors = await BookValidation(title, quantity, price);
-        await setErrors(validationErrors);
-        setNewBook("");
-        !validationErrors && closeModal();
+        setErrors(validationErrors);
+
+        if (Object.keys(validationErrors).length === 0) {
+            mutate({id, title, quantity, price });
+        };
     };
 
     return (
         <div className={styles.container}>
-            <form className={styles.modal}>
+            <form className={styles.modal} onSubmit={editHandler}>
                 <div className={styles.inputs}>
                     <p>ویرایش اطلاعات</p>
                     <label>نام کتاب</label>
@@ -85,10 +91,8 @@ const EditBookModal = ({ newBook, setNewBook, closeModal, id }) => {
                     <span className={styles.errorText}>{errors.price}</span>)}
                 </div>
                 <div className={styles.buttons}>
-                {errors.emptyField && (
-                <span className={styles.errorText}>{errors.emptyField}</span>)}
-                    <button onClick={editHandler} className={styles.add}>ثبت اطلاعات جدید</button>
-                    <button onClick={closeModal} className={styles.cancel}>انصراف</button>
+                    <button type="submit" className={styles.add}>ثبت اطلاعات جدید</button>
+                    <button type="button" onClick={closeModal} className={styles.cancel}>انصراف</button>
                 </div>
             </form>
         </div>
